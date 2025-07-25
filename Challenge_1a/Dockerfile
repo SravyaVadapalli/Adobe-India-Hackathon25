@@ -1,14 +1,16 @@
-# Use official Python slim image for smaller size
-FROM --platform=linux/amd64 python:3.10-slim
+FROM python:3.10-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy the processing script into the container
+# Copy code
 COPY process_pdfs.py .
 
-# Install required Python packages (PyMuPDF)
-RUN pip install --no-cache-dir pymupdf
+# Install dependencies
+RUN pip install pdfminer.six
 
-# Set the default command to run the script
+# Create input/output folders
+RUN mkdir -p /app/input /app/output
+
+# Default command
 CMD ["python", "process_pdfs.py"]
