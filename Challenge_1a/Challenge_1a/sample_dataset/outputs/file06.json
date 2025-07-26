@@ -1,0 +1,255 @@
+{
+  "title": "On the matrices in B-spline collocation methods for Riesz",
+  "outline": [
+    {
+      "level": "H3",
+      "text": "1",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "2",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "0",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "2",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "n",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "u",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "8",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "2",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "A",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "N",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "h",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "m",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "1",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "v",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "4",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "3",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "8",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "4",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "1",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "6",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "0",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "1",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "2",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "v",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "X",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "On the matrices in B-spline collocation methods for Riesz",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "fractional equations and their spectral properties",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "M. Mazza1,\u2217",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "M. Donatelli2",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "C. Manni3",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "H. Speleers3",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "1",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Introduction",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "2 Preliminaries",
+      "page": 3
+    },
+    {
+      "level": "H3",
+      "text": "2.1 Fractional derivatives",
+      "page": 3
+    },
+    {
+      "level": "H3",
+      "text": "2.2 Spectral tools",
+      "page": 4
+    },
+    {
+      "level": "H3",
+      "text": "2.3 B-splines and cardinal B-splines",
+      "page": 5
+    },
+    {
+      "level": "H2",
+      "text": "3 Fractional derivatives of cardinal B-splines",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "4",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "IgA collocation discretization of the fractional Riesz operator",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "5 Properties of the function f p,\u03b1",
+      "page": 10
+    },
+    {
+      "level": "H2",
+      "text": "6 Spectral symbol of",
+      "page": 13
+    },
+    {
+      "level": "H3",
+      "text": "n\u2212",
+      "page": 13
+    },
+    {
+      "level": "H3",
+      "text": "\u03b1Ap,\u03b1",
+      "page": 13
+    },
+    {
+      "level": "H3",
+      "text": "n }n",
+      "page": 13
+    },
+    {
+      "level": "H2",
+      "text": "{",
+      "page": 13
+    },
+    {
+      "level": "H2",
+      "text": "7 Numerical experiments",
+      "page": 16
+    },
+    {
+      "level": "H2",
+      "text": "8 Conclusion and future perspective",
+      "page": 18
+    },
+    {
+      "level": "H2",
+      "text": "Acknowledgements",
+      "page": 20
+    },
+    {
+      "level": "H2",
+      "text": "References",
+      "page": 20
+    }
+  ]
+}
