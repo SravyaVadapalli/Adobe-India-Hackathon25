@@ -1,17 +1,15 @@
-# Start from Python base image for AMD64
-FROM --platform=linux/amd64 python:3.10-slim
+# Use a slim Python image
+FROM python:3.10-slim
 
-# Set working directory inside container
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy only requirements first for faster rebuilds
+# Copy dependency list first and install packages
 COPY requirements.txt .
-
-# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the full project into container
+# Copy all files into container
 COPY . .
 
-# Run the processing script on container start
+# Set default command to run the processing script
 CMD ["python", "process_pdfs.py"]
