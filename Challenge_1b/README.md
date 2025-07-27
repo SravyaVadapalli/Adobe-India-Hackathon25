@@ -6,53 +6,72 @@ Advanced PDF analysis solution that processes multiple document collections and 
 ## Project Structure
 ```
 Challenge_1b/
-├── Collection 1/                    # Travel Planning
-│   ├── PDFs/                       # South of France guides
-│   ├── challenge1b_input.json      # Input configuration
-│   └── challenge1b_output.json     # Analysis results
-├── Collection 2/                    # Adobe Acrobat Learning
-│   ├── PDFs/                       # Acrobat tutorials
-│   ├── challenge1b_input.json      # Input configuration
-│   └── challenge1b_output.json     # Analysis results
-├── Collection 3/                    # Recipe Collection
-│   ├── PDFs/                       # Cooking guides
-│   ├── challenge1b_input.json      # Input configuration
-│   └── challenge1b_output.json     # Analysis results
-└── README.md
+├── Collection 1/ # Travel Planning
+│ ├── PDFs/ # Input documents
+│ ├── challenge1b_input.json # Input persona & task description
+│ └── challenge1b_output.json # Output with extracted structured content
+├── Collection 2/ # Adobe Acrobat Learning
+├── Collection 3/ # Recipe Collection
+├── Dockerfile # Docker setup for reproducible environment
+├── process_pdfs.py # Main runner for processing
+├── requirements.txt # Python dependencies
+└── utils/
+└── parser.py # PDF parsing and text extraction logic
 ```
 
-## Collections
+## ⚙️ How It Works
 
-### Collection 1: Travel Planning
-- **Challenge ID**: round_1b_002
-- **Persona**: Travel Planner
-- **Task**: Plan a 4-day trip for 10 college friends to South of France
-- **Documents**: 7 travel guides
+### Input
+- Each `Collection` has:
+  - `PDFs/` folder containing relevant documents
+  - `challenge1b_input.json` describing the **persona**, **task**, and **document list**
 
-### Collection 2: Adobe Acrobat Learning
-- **Challenge ID**: round_1b_003
-- **Persona**: HR Professional
-- **Task**: Create and manage fillable forms for onboarding and compliance
-- **Documents**: 15 Acrobat guides
+### Processing
+- PDFs are parsed using `pdfminer.six`
+- Relevant content is extracted based on the persona and task
+- Sections are ranked based on relevance using keyword matching, embeddings, or other logic
 
-### Collection 3: Recipe Collection
-- **Challenge ID**: round_1b_001
-- **Persona**: Food Contractor
-- **Task**: Prepare vegetarian buffet-style dinner menu for corporate gathering
-- **Documents**: 9 cooking guides
+### Output
+- `challenge1b_output.json` with:
+  - Metadata (persona, task, timestamp)
+  - Extracted sections with page number, importance ranking
+  - Refined subsection text
 
-## Input/Output Format
+---
+
+## 🚀 Running the Project via Docker
+
+### 1️⃣ Build the Docker Image
+
+```bash
+docker build -t adobe-challenge-1b .
+```
+
+### 2️⃣ Run the Container
+```docker run --rm \
+  -v "${PWD}/Challenge_1b/<collection>/PDFs:/app/input" \
+  -v "${PWD}/Challenge_1b/<collection>:/app/output" \
+  adobe-challenge-1b
+```
 
 ### Input JSON Structure
 ```json
 {
   "challenge_info": {
-    "challenge_id": "round_1b_XXX",
-    "test_case_name": "specific_test_case"
+    "challenge_id": "round_1b_001",
+    "test_case_name": "menu_planning",
+    "description": "Dinner menu planning"
   },
-  "documents": [{"filename": "doc.pdf", "title": "Title"}],
-  "persona": {"role": "User Persona"},
-  "job_to_be_done": {"task": "Use case description"}
+  "documents": [
+    { "filename": "Dinner Ideas - Sides_1.pdf", "title": "Dinner Ideas - Sides_1" },
+    ...
+  ],
+  "persona": {
+    "role": "Food Contractor"
+  },
+  "job_to_be_done": {
+    "task": "Prepare a vegetarian buffet-style dinner menu for a corporate gathering, including gluten-free items."
+  }
 }
 ```
 
@@ -60,24 +79,27 @@ Challenge_1b/
 ```json
 {
   "metadata": {
-    "input_documents": ["list"],
-    "persona": "User Persona",
-    "job_to_be_done": "Task description"
+    "input_documents": [...],
+    "persona": "Food Contractor",
+    "job_to_be_done": "...",
+    "processing_timestamp": "2025-07-24T13:00:00"
   },
   "extracted_sections": [
     {
-      "document": "source.pdf",
-      "section_title": "Title",
+      "document": "...",
+      "section_title": "...",
       "importance_rank": 1,
-      "page_number": 1
-    }
+      "page_number": 3
+    },
+    ...
   ],
   "subsection_analysis": [
     {
-      "document": "source.pdf",
-      "refined_text": "Content",
-      "page_number": 1
-    }
+      "document": "...",
+      "refined_text": "...",
+      "page_number": 3
+    },
+    ...
   ]
 }
 ```
