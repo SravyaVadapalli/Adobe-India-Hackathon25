@@ -48,9 +48,9 @@ docker build -t adobe-challenge-1b .
 ```
 
 ### 2️⃣ Run the Container
-```docker run --rm \
-  -v "${PWD}/Challenge_1b/<collection>/PDFs:/app/input" \
-  -v "${PWD}/Challenge_1b/<collection>:/app/output" \
+```docker run --rm `
+  -v "${PWD}/Collection 1/PDFs:/app/input" `
+  -v "${PWD}/Collection 1:/app/output" `
   adobe-challenge-1b
 ```
 
