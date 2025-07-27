@@ -1,72 +1,66 @@
-import json
 import os
-from utils.parser import extract_text_from_pdf
+import json
+from pathlib import Path
+from utils.parser import extract_relevant_sections
 
-def load_input_config(path):
-    """Load the input configuration JSON."""
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+# Automatically detect collection folders
+def get_collections(base_path="."):
+    return sorted([f for f in os.listdir(base_path) if f.startswith("Collection") and os.path.isdir(f)])
 
-def process_documents(input_config, collection_path):
-    """Extract and analyze documents for a given collection."""
-    pdf_dir = os.path.join(collection_path, "PDFs")
+# Process a single collection
+def process_collection(collection_path):
+    input_path = os.path.join(collection_path, "challenge1b_input.json")
     output_path = os.path.join(collection_path, "challenge1b_output.json")
 
-    output = {
-        "metadata": {
-            "input_documents": [],
-            "persona": input_config["persona"]["role"],
-            "job_to_be_done": input_config["job_to_be_done"]["task"]
-        },
-        "extracted_sections": [],
-        "subsection_analysis": []
+    if not os.path.exists(input_path):
+        print(f"[!] Skipping {collection_path}: No challenge1b_input.json found.")
+        return
+
+    print(f"📁 Processing: {collection_path}")
+
+    with open(input_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    documents = data["documents"]
+    persona = data["persona"]["role"]
+    task = data["job_to_be_done"]["task"]
+    result = {
+        "challenge_id": data["challenge_info"]["challenge_id"],
+        "test_case_name": data["challenge_info"]["test_case_name"],
+        "persona": persona,
+        "task": task,
+        "documents": []
     }
 
-    for doc in input_config["documents"]:
-        filename = doc["filename"]
-        title = doc["title"]
-        filepath = os.path.join(pdf_dir, filename)
-
-        if not os.path.exists(filepath):
-            print(f"❌ File not found: {filepath}")
+    for doc in documents:
+        pdf_path = os.path.join(collection_path, "PDFs", doc["filename"])
+        if not os.path.exists(pdf_path):
+            print(f"  [!] Missing PDF: {pdf_path}, skipping.")
             continue
 
-        text_pages = extract_text_from_pdf(filepath)
-        output["metadata"]["input_documents"].append(filename)
+        print(f"  📄 Extracting from: {doc['filename']}")
+        relevant_sections = extract_relevant_sections(pdf_path, persona, task)
 
-        # Process first 3 pages as a sample
-        for i, page_data in enumerate(text_pages[:3]):
-            output["extracted_sections"].append({
-                "document": filename,
-                "section_title": title,
-                "importance_rank": i + 1,
-                "page_number": page_data["page_number"]
-            })
-            output["subsection_analysis"].append({
-                "document": filename,
-                "refined_text": page_data["text"][:300],
-                "page_number": page_data["page_number"]
-            })
+        result["documents"].append({
+            "filename": doc["filename"],
+            "title": doc["title"],
+            "relevant_sections": relevant_sections
+        })
 
-    # Write output JSON
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2)
+        json.dump(result, f, indent=2, ensure_ascii=False)
 
-    print(f"✅ Output written to {output_path}")
+    print(f"✅ Output saved: {output_path}\n")
 
+# Main processing loop
 def main():
-    """Main driver for processing all collections."""
-    collections = ["Collection 1", "Collection 2", "Collection 3"]
+    collections = get_collections()
+    if not collections:
+        print("❌ No collection folders found.")
+        return
 
     for collection in collections:
-        input_path = os.path.join(collection, "challenge1b_input.json")
-
-        if os.path.exists(input_path):
-            print(f"\n📁 Processing {collection}")
-            input_config = load_input_config(input_path)
-            process_documents(input_config, collection)
-        else:
-            print(f"⚠️ Skipping {collection}: No input JSON found.")
+        process_collection(collection)
 
 if __name__ == "__main__":
     main()
