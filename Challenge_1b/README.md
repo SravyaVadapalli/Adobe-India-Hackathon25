@@ -27,7 +27,7 @@ Challenge_1b/
   - `challenge1b_input.json` describing the **persona**, **task**, and **document list**
 
 ### Processing
-- PDFs are parsed using `pdfminer.six`
+- PDFs are parsed using PyMuPDF (fitz), a lightweight and fast PDF parser, to extract textual content page by page.
 - Relevant content is extracted based on the persona and task
 - Sections are ranked based on relevance using keyword matching, embeddings, or other logic
 
